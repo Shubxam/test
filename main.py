@@ -24,7 +24,7 @@ if __name__=="__main__":
 
     # get headlines in a list
     headlines = articles_df.headline.drop_duplicates().to_list()
-    classifier = pipeline("sentiment-analysis", model="./models/distilroberta-finetuned-financial-news-sentiment-analysis", framework='pt', device='mps')
+    classifier = pipeline("sentiment-analysis", model="./models/distilroberta-finetuned-financial-news-sentiment-analysis", framework='pt')
     
     start_time_2 = time.time()
     results = []
