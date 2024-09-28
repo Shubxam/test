@@ -1,0 +1,25 @@
+name: run local hf-model in docker
+
+on:
+  push:
+    branches: main
+
+jobs:
+  sentiment-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      -  name: checkout repository
+         uses: actions/checkout@v3
+      -  name: setup docker buildx
+         uses: docker/setup-buildx-action@v2
+      -  name: Build and run docker image
+         run: |
+           docker build -t sentiment-analysis -f Dockerfile .
+           docker run --name sentiment-container -v ${{ github.workspace }}:/app/workspace sentiment-analysis
+      -  name: commit and push changes
+         run: |
+           git config --local user.email "action@github.com"
+           git config --local user.name "GitHub Action"
+           git add .
+           git commit -m 'Update sentiment data and dashboard' || echo "No changes to commit"
+           git push
