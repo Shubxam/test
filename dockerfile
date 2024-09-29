@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Run fetch-data.py and dashboard-generation.py when the container launches
 CMD ["sh", "-c", "git lfs install && \
     GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis && \
-    mv distilroberta-finetuned-financial-news-sentiment-analysis/ models/ && \
+    mkdir models && mv distilroberta-finetuned-financial-news-sentiment-analysis/ models/ && \
     cd models/distilroberta-finetuned-financial-news-sentiment-analysis/ && \
     git lfs pull --include model.safetensors && \
     cd ../../ && \
